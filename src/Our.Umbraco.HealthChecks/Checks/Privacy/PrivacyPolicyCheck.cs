@@ -11,11 +11,11 @@ namespace Our.Umbraco.HealthChecks.Checks.Privacy
         Group = "Privacy")]
     public class PrivacyPolicyCheck : AbstractConfigCheck
     {
-        protected readonly ILocalizedTextService TextService;
+        private ILocalizedTextService _textService;
 
-        public PrivacyPolicyCheck(HealthCheckContext healthCheckContext) : base(healthCheckContext)
+        public PrivacyPolicyCheck(ILocalizedTextService textService) : base(textService)
         {
-            TextService = healthCheckContext.ApplicationContext.Services.TextService;
+            _textService = textService;
         }
 
         public override string FilePath => "~/Web.config";
@@ -32,11 +32,13 @@ namespace Our.Umbraco.HealthChecks.Checks.Privacy
         };
 
 
-        public override string CheckSuccessMessage => HealthCheckContext.ApplicationContext.Services.TextService.Localize("Our.Umbraco.HealthChecks/privacyPolicyConfigSuccess");
+        public override string CheckSuccessMessage => _textService.Localize("Our.Umbraco.HealthChecks/privacyPolicyConfigSuccess");
 
-        public override string CheckErrorMessage => HealthCheckContext.ApplicationContext.Services.TextService.Localize("Our.Umbraco.HealthChecks/privacyPolicyError");
+        public override string CheckErrorMessage => _textService.Localize("Our.Umbraco.HealthChecks/privacyPolicyError");
 
-        public override string RectifySuccessMessage => HealthCheckContext.ApplicationContext.Services.TextService.Localize("Our.Umbraco.HealthChecks/privacyPolicyRectifySuccess");
+        public override string RectifySuccessMessage => _textService.Localize("Our.Umbraco.HealthChecks/privacyPolicyRectifySuccess");
+
+        public override string MissingErrorMessage => _textService.Localize("Our.Umbraco.HealthChecks/privacyPolicyConfigMissing");
     }
 
 }

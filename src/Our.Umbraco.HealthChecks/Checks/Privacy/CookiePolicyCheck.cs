@@ -7,15 +7,15 @@ namespace Our.Umbraco.HealthChecks.Checks.Privacy
 {
 
     [HealthCheck("4A616B92-AC7C-4CA0-9F77-08E8543AEC8E", "Cookie Policy Check - (from Our.Umbraco.HealthChecks)",
-        Description = "Check to ensure a Cookie Policy is selected",
+        Description = "Check to ensure a Cookie Policy is selected.",
         Group = "Privacy")]
     public class CookiePolicyCheck : AbstractConfigCheck
     {
-        protected readonly ILocalizedTextService TextService;
+        private ILocalizedTextService _textService;
 
-        public CookiePolicyCheck(HealthCheckContext healthCheckContext) : base(healthCheckContext)
+        public CookiePolicyCheck(ILocalizedTextService textService) : base(textService)
         {
-            TextService = healthCheckContext.ApplicationContext.Services.TextService;
+            _textService = textService;
         }
 
         public override string FilePath => "~/Web.config";
@@ -31,11 +31,13 @@ namespace Our.Umbraco.HealthChecks.Checks.Privacy
             new AcceptableConfiguration { IsRecommended = false, Value = string.Empty }
         };
 
-        public override string CheckSuccessMessage => HealthCheckContext.ApplicationContext.Services.TextService.Localize("Our.Umbraco.HealthChecks/cookiePolicyConfigSuccess");
+        public override string CheckSuccessMessage => _textService.Localize("Our.Umbraco.HealthChecks/cookiePolicyConfigSuccess");
 
-        public override string CheckErrorMessage => HealthCheckContext.ApplicationContext.Services.TextService.Localize("Our.Umbraco.HealthChecks/cookiePolicyError");
+        public override string CheckErrorMessage => _textService.Localize("Our.Umbraco.HealthChecks/cookiePolicyError");
 
-        public override string RectifySuccessMessage => HealthCheckContext.ApplicationContext.Services.TextService.Localize("Our.Umbraco.HealthChecks/cookiePolicyRectifySuccess");
+        public override string RectifySuccessMessage => _textService.Localize("Our.Umbraco.HealthChecks/cookiePolicyRectifySuccess");
+
+        public override string MissingErrorMessage => _textService.Localize("Our.Umbraco.HealthChecks/cookiePolicyConfigMissing");
     }
 
 }
