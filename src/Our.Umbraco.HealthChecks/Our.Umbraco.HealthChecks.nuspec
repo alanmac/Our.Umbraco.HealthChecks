@@ -12,7 +12,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      - fixed issue with azure logging check
+      - migrated to umbraco v8
+      - removed some packages during migration to v8
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Our.Umbraco.HealthChecks Umbraco Health Checks Our CMS Contrib HealthChecks lib library</tags>

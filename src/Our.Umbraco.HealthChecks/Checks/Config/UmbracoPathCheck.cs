@@ -13,11 +13,11 @@ namespace Our.Umbraco.HealthChecks.Checks.Config
     Group = "Configuration")]
     public class UmbracoPathCheck : HealthCheck
     {
-        protected readonly ILocalizedTextService TextService;
+        protected readonly ILocalizedTextService _textService;
 
-        public UmbracoPathCheck(HealthCheckContext healthCheckContext) : base(healthCheckContext)
+        public UmbracoPathCheck(ILocalizedTextService textService)
         {
-            TextService = healthCheckContext.ApplicationContext.Services.TextService;
+            _textService = textService;
         }
 
         public override IEnumerable<HealthCheckStatus> GetStatus()
@@ -32,17 +32,17 @@ namespace Our.Umbraco.HealthChecks.Checks.Config
 
         private HealthCheckStatus CheckUmbracoPath()
         {
-            var umbracoPath = WebConfigurationManager.AppSettings["umbracoPath"];
-            var umbracoReservedPaths = WebConfigurationManager.AppSettings["umbracoReservedPaths"];
+            var umbracoPath = WebConfigurationManager.AppSettings["Umbraco.Core.Path"];
+            var umbracoReservedPaths = WebConfigurationManager.AppSettings["Umbraco.Core.ReservedPaths"];
 
             bool success = false;
             StringBuilder message = new StringBuilder();
             if(umbracoPath != "~/umbraco")
             {
-                message.Append(TextService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckPathChanged"));
+                message.Append(_textService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckPathChanged"));
                 if (!umbracoReservedPaths.Split(',').Contains(umbracoPath))
                 {
-                    message.Append(TextService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckReservedPathMissing"));
+                    message.Append(_textService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckReservedPathMissing"));
                 }
                 else
                 {
@@ -51,16 +51,16 @@ namespace Our.Umbraco.HealthChecks.Checks.Config
             }
             else
             {
-                message.Append(TextService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckConsiderChangingPath"));
+                message.Append(_textService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckConsiderChangingPath"));
                 message.Append("<br/><br/>");
                 message.Append("<ol>");
-                message.AppendFormat("<li>{0}</li>", TextService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckInstructions1"));
-                message.AppendFormat("<li>{0}</li>", TextService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckInstructions2"));
-                message.AppendFormat("<li>{0}</li>", TextService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckInstructions3"));
-                message.AppendFormat("<li>{0}</li>", TextService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckInstructions4"));
+                message.AppendFormat("<li>{0}</li>", _textService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckInstructions1"));
+                message.AppendFormat("<li>{0}</li>", _textService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckInstructions2"));
+                message.AppendFormat("<li>{0}</li>", _textService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckInstructions3"));
+                message.AppendFormat("<li>{0}</li>", _textService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckInstructions4"));
                 message.Append("<ol>");
                 message.Append("<br/>");
-                message.Append(TextService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckWarning"));
+                message.Append(_textService.Localize("Our.Umbraco.HealthChecks/umbracoPathCheckWarning"));
                 message.Append("<br/>");
             }
             

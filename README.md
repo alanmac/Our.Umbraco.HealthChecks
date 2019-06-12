@@ -9,7 +9,7 @@
 
 This repo is a collection of community written [Health Checks](https://our.umbraco.com/Documentation/Extending/Health-Check/) for Umbraco CMS.
 
-Please follow the naming of the folders and checks which are in the [Umbraco Core Health Checks](https://github.com/umbraco/Umbraco-CMS/tree/dev-v7/src/Umbraco.Web/HealthCheck/Checks)
+Please follow the naming of the folders and checks which are in the [Umbraco Core Health Checks](https://github.com/umbraco/Umbraco-CMS/tree/v8/dev/src/Umbraco.Web/HealthCheck/Checks)
 
 *Don't forget to do a NuGet restore.*
 
@@ -18,49 +18,40 @@ You can login to the website and test the health checks. Here are the login deta
 <strong>username:</strong> admin@admin.com<br/>
 <strong>password:</strong> 1234567890
 
-## Current Checks
+This package has been ported over from Umbraco v7 to Umbraco v8.
+If you are looking for the Umbraco v7 version then switch to the dev/v7 branch
 
-### Azure
+## Checks ported to the Umbraco v8 version:
 
-#### Azure Examine Compatibility Check
+| Check                 | Description                                                            | Id  |
+| --------------------- |:---------------------------------------------------------------------- | --- |
+| **Azure**             |                                                                        |     |
+| AzureFcnModeCheck     | Checks that fcnMode config is appropriate for the Azure platform.      |EA9619FE-1DF4-4399-A4E5-32F2CF0CDC1F|
+| AzureTempStorageCheck | Checks that temp storage config is appropriate for the Azure platform. |F9088377-103A-4712-B428-D4AB6E5B2A67|
+| **Config**            |                                                                        |     |
+| PostProcessorCheck    | Check if ImageProcessor.Web.PostProcessor is installed                 |CA765D50-85D9-4346-BBC4-8DEEBB7EBAE2|
+| UmbracoPathCheck      | Checks to see if you have changed the umbraco path.                    |467EFE42-E37D-47FE-A75F-E2D7D2D98438|
+| **Security**          |                                                                        |     |
+| AdminUserCheck        | Check the admin user isn't called 'admin'                              |42a3a15f-c2f0-48e7-ae5a-1237c5af5e35|
 
-Checks that examine settings are appropriate for the Azure platform.
+## The following Umbraco v7 checks were removed from the Umbraco v8 version:
 
-#### Azure File Change Notification Config Check
-
-Checks that fcnMode config is appropriate for the Azure platform.
-
-#### Azure Logging Check
-
-Checks that logging patterns are appropriate for the Azure platform.
-
-#### Azure Temp Storage Config Check
-
-Checks that temp storage config is appropriate for the Azure platform.
-
-### Config
-
-#### Examine Rebuild On Startup
-
-Check whether examine rebuild on start is off
-
-#### Umbraco Path Check
-
-Checks to see if you have changed the umbraco path.
-
-### PostProcessor Check
-
-Checks if ImageProcessor.Web.PostProcessor is installed.
-
-### Security
-
-#### Admin User Check
-
-Check the admin user isn't called 'admin'
-
-#### TLS Check
-
-Check the TLS protocol being used
+| Check                        | Reason                                                            |
+| ---------------------------- |:------------------------------------------------------------------|
+| **Azure**                    |                                                                   |
+| AzureExamineCheck            | Removed because Examine config has been removed.                  |
+| AzureLoggingCheck            | Removed now we have moved to serilog                              |
+| **Config**                   |                                                                   |
+| ExamineRebuildOnStartCheck   | Removed because Examine config has been removed                   |
+| **Data Integrity**           |                                                                   |
+| ContentVersionsCheck         | Removed until we understand how to query the content versions     |
+| **SEO**                      |                                                                   |
+| LorumIpsumCheck              | Removed until we understand how to search using Examine           |
+| XmlSitemapCheck              | Removed until we understand how to get the httpcontext            |
+| **Security**                 |                                                                   |
+| HstsCheck                    | Exists in Core                                                    |
+| TlsCheck                     | Exists in Core                                                    |
+| ClientDependencyVersionCheck | Removed because of no current vulnerabilities in Umbraco v8       |
 
 ## Suggest Checks
 
