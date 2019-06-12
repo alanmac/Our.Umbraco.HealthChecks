@@ -47,8 +47,10 @@
     <key alias="privacyPolicyConfigSuccess">A Privacy Policy has been selected.</key>
     <key alias="privacyPolicyError">A Privacy Policy needs to be selected.</key>
     <key alias="privacyPolicyRectifySuccess">You have successfully selected a Privacy Policy.</key>
+    <key alias="privacyPolicyConfigMissing">Please add the App Setting 'Our.Umbraco.HealthChecks.Privacy.PrivacyPolicyUDI' to your web.config</key>
     <key alias="cookiePolicyConfigSuccess">A Cookie Policy has been selected.</key>
     <key alias="cookiePolicyError">A Cookie Policy needs to be selected.</key>
     <key alias="cookiePolicyRectifySuccess">You have successfully selected a Cookie Policy.</key>
+    <key alias="cookiePolicyConfigMissing">Please add the App Setting 'Our.Umbraco.HealthChecks.Privacy.CookiePolicyUDI' to your web.config</key>
   </area>
 </language>
